@@ -203,7 +203,6 @@ const addquotation = () => {
 
     const calculatedTotalDirect = directBase + calculatedSurchargeDirect;
     const calculatedTotalPart = partBase + calculatedSurchargePart;
-
     setSurchargeDirect(calculatedSurchargeDirect.toFixed(2));
     setSurchargePart(calculatedSurchargePart.toFixed(2));
     setTotalDirect(directBase);
