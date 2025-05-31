@@ -6,6 +6,8 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 
 const addquotation = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorValue, setErrorValue] = useState("hey i am error value");
   const [branchPhone, setBranchPhone] = useState("9065841889");
   const [branchEmail, setBranchEmail] = useState("nextgencarcarrier01@gmail.com");
   const [branchAddress, setBranchAddress] = useState("East Laxmi Nagar, Nandlal Chapra, Patna Marble Gali, Ashochak, Patna 800016.");
@@ -101,23 +103,22 @@ const addquotation = () => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Error response:", errorData);
-        alert("Something went wrong. Check console for details.");
+        const error = await response.json();
+        console.error("Error response:", error);
+        const firstKey = Object.keys(error)[0];
+        const firstErrorMessage = error[firstKey][0];
+        console.log(firstErrorMessage);
+        setShowError(true)
+        setErrorValue(firstKey + "->" + firstErrorMessage)
         return;
       }
-
       const result = await response.json();
       console.log("Success:", result);
       setShowModal(true);  // modal dikhao
     } catch (error) {
       console.error("Network error:", error);
-      alert("Network error. Please try again.");
+      setShowError(true)
     }
-  
-
-
-
   };
   const downloadqQuotation = () => {
     alert("downloading....")
@@ -149,7 +150,7 @@ const addquotation = () => {
       surchargePart,
       totalDirect,
       totalPart,
-    
+
     };
     fetch("https://ankeshmonu.pythonanywhere.com/pdfquotation", {
       method: "POST",
@@ -197,7 +198,6 @@ const addquotation = () => {
       Number(otherPart) +
       Number(entryPart) +
       Number(insurancePart);
-
     const calculatedSurchargeDirect = 0.10 * directBase;
     const calculatedSurchargePart = 0.10 * partBase;
 
@@ -517,6 +517,16 @@ const addquotation = () => {
         </div>
 
 
+      )}
+
+      {showError && (
+        <div className="fixed inset-0 bg-gradient-to-br from-black/90 to-black/70 flex items-center justify-center z-50">
+          <div className="bg-white  p-6 relative rounded-lg shadow-lg max-w-lg w-full">
+            <h2 className="text-xl text-red-700 font-bold mb-4">Error!</h2>
+            <p className="text-xl"> {errorValue} </p>
+            <IoMdCloseCircleOutline className="absolute right-0 text-black text-4xl top-0 cursor-pointer" onClick={() => setShowError(false)} />
+          </div>
+        </div>
       )}
 
       <p className=" w-[20%] m-auto">
