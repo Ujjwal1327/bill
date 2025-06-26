@@ -325,7 +325,7 @@ const addquotation = () => {
                 <input type="text" className="outline-none border-none" value={email} onChange={(e) => setEmail(e.target.value)} />
               </div>
               <div className="border  flex gap-2 w-6/12 p-1">
-                <p className="text-sm">Pan Number: </p>
+                <p className="text-sm">Pan Number:AAKCN1927A </p>
               </div>
             </div>
 
