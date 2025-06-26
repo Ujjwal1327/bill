@@ -334,7 +334,7 @@ const addquotation = () => {
                 <p className="text-sm">Quotation valid for 15 days</p>
               </div>
               <div className="border  flex gap-2 w-6/12 p-1">
-                <p className="text-sm">GST Number: </p>
+                <p className="text-sm">GST Number: 10AAKCN1927A1Z4 </p>
               </div>
             </div>
 
